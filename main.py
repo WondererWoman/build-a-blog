@@ -36,9 +36,19 @@ class Handler(webapp2.RequestHandler):
         self.write(self.render_str(template, **kw))
 
 
-class MainHandler(webapp2.RequestHandler):
+class MainHandler(Handler):
     def get(self):
-        self.response.write('Hello world!')
+        self.render("base.html")
+
+    def post(self):
+        title = self.request.get("title")
+        blog_entry = self.request.get("blog_entry")
+
+        if title and blog_entry:
+            self.write("Thanks!")
+        else:
+            error = "Please enter a Title and Blog Post!"
+            self.render("base.html", error = error)
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler)
