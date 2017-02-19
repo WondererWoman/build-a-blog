@@ -45,7 +45,10 @@ class Blog(Handler):
         blogs = db.GqlQuery("SELECT * FROM BlogEntry "
                             "ORDER BY created DESC "
                             "LIMIT 5")
-        self.render("blog.html", title=title, blog_entry=blog_entry)
+        self.render("blog.html", title=title, blog_entry=blog_entry, blogs=blogs)
+
+    def get(self):
+        self.render_blog()
 
 class MainHandler(Handler):
     def render_base(self, title="", blog_entry="", error=""):

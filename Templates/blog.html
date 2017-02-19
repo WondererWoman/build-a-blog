@@ -3,24 +3,21 @@
 <html>
   <head>
     <title></title>
+    <link rel="stylesheet" type="text/css" href="styles.css" />
   </head>
 
     <body>
       <h1>Bloggy McBlogface</h1>
 
       <form method="post">
-        <label>
-          <div>Title</div>
-          <input type="text" name="title" value="{{title}}">
-        </label>
 
-        <label>
-          <div>Blog Entry</div>
-          <textarea name="blog_entry"></textarea>
-        </label>
+
+
+      </form>
 
       {% for blog in blogs %}
           <div class="blog-post">
+            <div class="created">{{blog.created}}</div>
             <div class="blog-title">{{blog.title}}</div>
             <pre class="blog-body">{{blog.blog_entry}}</pre>
       {% endfor %}
