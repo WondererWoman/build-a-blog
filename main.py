@@ -35,6 +35,11 @@ class Handler(webapp2.RequestHandler):
     def render(self, template, **kw):
         self.write(self.render_str(template, **kw))
 
+class ViewPostHandler(Handler):
+    def get(self, id, title="", blog_entry=""):
+        ind_blog = BlogEntry.get_by_id(int(id), parent=None)
+        self.render("ind-blog.html", title=title, blog_entry=blog_entry, ind_blog=ind_blog)
+
 class BlogEntry(db.Model):
     title = db.StringProperty(required = True)
     blog_entry = db.TextProperty(required = True)
@@ -71,6 +76,8 @@ class MainHandler(Handler):
             self.render_base(title, blog_entry, error)
 
 app = webapp2.WSGIApplication([
-    ('/', MainHandler),
-    ('/blog', Blog)
+    ('/', Blog),
+    ('/newpost', MainHandler),
+    ('/blog', Blog),
+    webapp2.Route('/blog/<id:\d+>', ViewPostHandler)
 ], debug=True)
