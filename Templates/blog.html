@@ -3,7 +3,7 @@
 <html>
   <head>
     <title></title>
-    <!--<link rel="stylesheet" type="text/css" href="styles.css" />-->
+    <link rel="stylesheet" type="text/css" href="/stylesheets/styles.css" />
   </head>
 
     <body>
@@ -11,10 +11,11 @@
 
       {% for blog in blogs %}
           <div class="blog-post">
-            <div class="created">{{blog.created}}</div>
-            <div class="blog-title">{{blog.title}}</div>
+            <!--<div class="created">{{blog.created}}</div>-->
+            <a href="/blog/{{blog.key().id()}}">
+              <div class="blog-title">{{blog.title}}</div>
+            </a>
             <pre class="blog-body">{{blog.blog_entry}}</pre>
-            <a href="/blog/{{blog.key().id()}}">Link</a>
       {% endfor %}
 
       <form method="post">
